@@ -1,2 +1,3 @@
 .venv/
 vector_stores/
+__pycache__/

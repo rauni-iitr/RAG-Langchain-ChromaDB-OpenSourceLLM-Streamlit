@@ -1,5 +1,5 @@
 import streamlit as st
-from app import *
+from rag import *
 
 st.set_page_config(page_title="LLM Search Titaninc", page_icon=':robot:')
 # st.header("Query PDF")

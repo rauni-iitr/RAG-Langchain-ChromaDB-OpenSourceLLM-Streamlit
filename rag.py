@@ -14,8 +14,6 @@ from langchain.callbacks.base import BaseCallbackHandler
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
-from transformers import AutoTokenizer, AutoModelForQuestionAnswering
-from transformers import AutoTokenizer, pipeline
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 # for streaming in Streamlit without LECL
@@ -61,9 +59,9 @@ embeddings = HuggingFaceEmbeddings(
 def format_docs(docs):
     return "\n\n".join([doc.page_content for doc in docs])
 
-####################### RAG #################################
+############################################## RAG ########################################################
 
-
+########## Creating prompt ##########
 prompt_template = """Use the following pieces of context regarding titanic ship to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
 {context}
@@ -74,7 +72,7 @@ Helpful Answer:
 
 prompt = PromptTemplate(template=prompt_template, input_variables=['context', 'question'])
 
-#VectorDB creation and saving to disk
+########## VectorDB creation and saving to disk ##########
 client = chromadb.Client()
 
 persist_directory="/Users/raunakanand/Documents/Work_R/llm0/vector_stores"
@@ -86,7 +84,7 @@ vectordb = Chroma.from_documents(
 )
 vectordb.persist()
 
-#VectorDB -loading from disk
+########## VectorDB -loading from disk ##########
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embeddings, collection_name='chroma1')
 retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 
@@ -107,12 +105,14 @@ llm = LlamaCpp(
     # callbacks=[StreamingStdOutCallbackHandler()]
 )
 
+########## When using RetrievalQA chain from llm's chain ##########
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type='stuff',
                                  retriever=retriever,
                                 #  return_source_documents=True,
                                  chain_type_kwargs={'prompt': prompt},
                                  verbose=False)
 
+########## RAG's chain in langchain's LECL format ##########
 rag_chain = ({"context": retriever | format_docs, "question": RunnablePassthrough()} | 
              prompt | llm | StrOutputParser())
 
@@ -121,7 +121,6 @@ def inference(query: str):
     # return qa.run(query)
     return rag_chain.stream(query)
 
-print('final')
 
 
 
