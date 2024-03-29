@@ -9,7 +9,7 @@ The UI is built on streamlit, where the output of RAG model is streamed token on
 ![image info](./assets/snap1.png)
 
 ### <u>LCEL - LangChain Expression Language</u>:
-Langchain composes chain of components in linux pip system like:<br>
+Langchain's LCEL composes chain of components in linux pip system like:<br>
 `chain = retriever | prompt | llm | Outputparser` <br>
 See implementation in `rag.py`
 
