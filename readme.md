@@ -22,13 +22,13 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 
 1. Clone the repo using git:
     ```shell
-    $ git clone https://github.com/rauni-iitr/langchain_chromaDB_opensourceLLM_streamlit.git
+    git clone https://github.com/rauni-iitr/langchain_chromaDB_opensourceLLM_streamlit.git
     ```
 
 2. Create a virtual enviornment, with 'venv' or with 'conda' and activate.
     ```shell
-    $ python3 -m venv .venv
-    $ source .venv/bin/activate
+    python3 -m venv .venv
+    source .venv/bin/activate
     ```
 
 3. Now this rag application is built using few dependencies:
@@ -42,7 +42,7 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 
     You can install all of these with pip;
     ```shell
-    $ pip install pypdf chromadb transformers sentence-transformers streamlit
+    pip install pypdf chromadb transformers sentence-transformers streamlit
     ```
 4. Installing llama-cpp-python:
     * This project uses uses [LlamaCpp-Python](https://github.com/abetlen/llama-cpp-python) for GGUF(llama-cpp-python >=0.1.83) models loading and inference, if you are using GGML models you need (llama-cpp-python <=0.1.76).
@@ -51,12 +51,12 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 
     For Nvidia's GPU infernece, use 'cuBLAS', run below commands in your terminal:
     ```shell
-    $ CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python==0.1.83 --no-cache-dir
+    CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python==0.1.83 --no-cache-dir
     ```
 
     For Apple's Metal(M1/M2) based infernece, use 'METAL', run:
     ```shell
-    $ CMAKE_ARGS="-DLLAMA_METAL=on"  FORCE_CMAKE=1 pip install llama-cpp-python==0.1.83 --no-cache-dir
+    CMAKE_ARGS="-DLLAMA_METAL=on"  FORCE_CMAKE=1 pip install llama-cpp-python==0.1.83 --no-cache-dir
     ```
     For more info, for setting right flags on any device where your app is running, see [here](https://codesandbox.io/p/github/imotai/llama-cpp-python/main).
 
@@ -73,7 +73,7 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 To run the model:
 
 ```shell
-    $ streamlit run st_app.py
+    streamlit run st_app.py
 ```
 
 
