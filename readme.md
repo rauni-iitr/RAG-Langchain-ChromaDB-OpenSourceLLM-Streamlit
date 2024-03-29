@@ -42,7 +42,7 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 
     You can install all of these with pip;
     ```shell
-    pip install pypdf chromadb transformers sentence-transformers streamlit
+    pip install pypdf chromadb langchain transformers sentence-transformers streamlit
     ```
 4. Installing llama-cpp-python:
     * This project uses uses [LlamaCpp-Python](https://github.com/abetlen/llama-cpp-python) for GGUF(llama-cpp-python >=0.1.83) models loading and inference, if you are using GGML models you need (llama-cpp-python <=0.1.76).
