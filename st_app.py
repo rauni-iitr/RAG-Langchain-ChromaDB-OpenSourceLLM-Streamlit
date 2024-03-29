@@ -3,9 +3,7 @@ from rag import *
 
 st.set_page_config(page_title="LLM Search Titaninc", page_icon=':robot:')
 # st.header("Query PDF")
-st.title("Welcome")
-
-# prompt = st.chat_input("Enter your message...")
+st.title("Welcome to Langchain RAG")
 
 if ('messages' not in st.session_state):
     st.session_state.messages = []
@@ -14,7 +12,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-prompt = st.chat_input("Enter your message...")
+prompt = st.chat_input("Enter your query about Titanic...")
 
 if (prompt):
     st.session_state.messages.append({'role':'user', 'content': prompt})

@@ -13,10 +13,9 @@ from langchain_core.prompts import PromptTemplate
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
-# for streaming in Streamlit without LECL
+################### for streaming in Streamlit without LECL ###################
 class StreamHandler(BaseCallbackHandler):
     def __init__(self, container, initial_text=""):
         self.container = container
@@ -25,7 +24,12 @@ class StreamHandler(BaseCallbackHandler):
     def on_llm_new_token(self, token: str, **kwargs) -> None:
         self.text += token
         self.container.markdown(self.text)
-
+# stream_handler = StreamHandler(st.empty())
+""" if you want to use streaming on your streamlit app, it's tricky to seperate model script \n
+and streamlit script if not using LECL, because llm will have to use 'streaming=True' \n
+and 'callbacks=[stream_handler]' and streamhandler uses st.empty() placeholder here which can't be first streamlit command. 
+"""
+               
 ####################### Data processing for vectorstore #################################
 pdf_folder_path = "./data_source"
 documents = []
@@ -91,7 +95,6 @@ retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 
 n_gpu_layers = 1
 n_batch = 512
-# stream_handler = StreamHandler(st.empty())
 
 llm = LlamaCpp(
     model_path="/Users/raunakanand/Documents/Work_R/llm_models/mistral-7b-v0.1.Q4_K_S.gguf",
@@ -105,7 +108,7 @@ llm = LlamaCpp(
     # callbacks=[StreamingStdOutCallbackHandler()]
 )
 
-########## When using RetrievalQA chain from llm's chain ##########
+########## use when using RetrievalQA chain from llm's chain ##########
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type='stuff',
                                  retriever=retriever,
                                 #  return_source_documents=True,

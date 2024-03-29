@@ -1,13 +1,22 @@
-pypdf
-langchain
-transformers
-chromadb
-streamlit
-sentence-transformers
-# Example: METAL
-CMAKE_ARGS="-DLLAMA_METAL=on"  FORCE_CMAKE=1 pip install llama-cpp-python==0.1.83 --no-cache-dir
+# About
+
+This project runs a local llm agent based RAG model on langchain using new pipesyntax [LCEL](https://python.langchain.com/docs/expression_language/get_started)(LangChain Expression Language) as well as older LLM chains(RetrievalQA), see `rag.py`. <br> We are using LECL in rag.py for inference as it has a smooth output streaming generator output which is consumed by streamlit using 'write_stream' method.
+
+The model uses persistent ChromaDB for vector store, which takes all the pdf files in `data_source` directory (one pdf about titanic for demo).
+
+The UI is built on streamlit, where the output of RAG model is streamed token on the streamlit app in a chat format, see `st_app.py`.
+
+![image info](./assets/snap1.png)
+
+### <u>LCEL - LangChain Expression Language</u>:
+Langchain composes chain of components in linux pip system like:</br>
+`chain = retriever | prompt | llm | Outputparser` </br>
+See implementation in `rag.py`
+
+![image info](./assets/lcel_pipe_flow.png)
 
 
+For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain/langchain-expression-language/)
 
 # Enviornment Setup 
 
