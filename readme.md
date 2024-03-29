@@ -8,6 +8,7 @@ The UI is built on streamlit, where the output of RAG model is streamed token on
 
 ![image info](./assets/snap1.png)
 
+__Note:__ The output can be streamed on terminal as well using calbacks. 
 ### <u>LCEL - LangChain Expression Language</u>:
 Langchain's LCEL composes chain of components in linux pip system like:<br>
 `chain = retriever | prompt | llm | Outputparser` <br>
