@@ -74,7 +74,7 @@ For more: [Pinecone LCEL Article](https://www.pinecone.io/learn/series/langchain
 To run the model:
 
 ```shell
-    streamlit run st_app.py
+streamlit run st_app.py
 ```
 
 
